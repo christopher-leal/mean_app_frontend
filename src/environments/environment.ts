@@ -4,7 +4,9 @@
 
 export const environment = {
 	production: false,
-	url: 'http://localhost:3000/api/'
+	url: 'http://localhost:3000/api/',
+	OAUTH_CLIENT: '379406748605-v6c121k4qs82cqdfoee09687e1hpti9l.apps.googleusercontent.com',
+	OAUTH_SECRET: 'VVQkK3eW7MY_GCQv8GIUU_qR'
 };
 
 /*

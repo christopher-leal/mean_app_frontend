@@ -3,5 +3,5 @@ export const saveToken = (token) => {
 };
 
 export const getToken = () => {
-	return localStorage.getItem('token');
+	return localStorage.getItem('token') || '';
 };
