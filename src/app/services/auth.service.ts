@@ -5,6 +5,7 @@ import { map, tap, catchError } from 'rxjs/operators';
 import { saveToken, getToken } from './../utils/jwt';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
+import { User } from './../interfaces/User';
 
 declare const gapi: any;
 
@@ -14,6 +15,7 @@ declare const gapi: any;
 export class AuthService {
 	private url = environment.url;
 	auth2: any;
+	user: User;
 
 	constructor(private _http: HttpClient, private _router: Router, private ngZone: NgZone) {
 		this.googleInit();
@@ -45,10 +47,11 @@ export class AuthService {
 	refreshToken(): Observable<boolean> {
 		const token = getToken();
 		return this._http.get(`${this.url}auth/refreshToken`, { headers: { token } }).pipe(
-			tap((resp: any) => {
+			map((resp: any) => {
+				this.user = resp.user;
 				saveToken(resp.token);
+				return true;
 			}),
-			map((resp) => true),
 			catchError((err) => of(false))
 		);
 	}
@@ -64,5 +67,12 @@ export class AuthService {
 				this._router.navigate([ 'login' ]);
 			});
 		});
+	}
+
+	get getImage() {
+		if (this.user.img.startsWith('http')) {
+			return `${this.user.img}`;
+		}
+		return `${this.url}uploads/users/${this.user.img}`;
 	}
 }

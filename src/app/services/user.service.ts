@@ -3,8 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { User } from './../interfaces/User';
 import { environment } from './../../environments/environment';
 
-declare const gapi: any;
-
 @Injectable({
 	providedIn: 'root'
 })
