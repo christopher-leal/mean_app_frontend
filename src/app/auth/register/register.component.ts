@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { checkPassword } from './../../utils/comparePassword';
 @Component({
 	selector: 'app-register',
 	templateUrl: './register.component.html',
@@ -25,7 +26,7 @@ export class RegisterComponent implements OnInit {
 				agree: [ null, [ Validators.required ] ]
 			},
 			{
-				validators: this.checkPassword('password', 'password2')
+				validators: checkPassword('password', 'password2')
 			}
 		);
 	}
@@ -79,16 +80,5 @@ export class RegisterComponent implements OnInit {
 
 	inputValidation(campo: string): boolean {
 		return this.form.get(campo).invalid && this.form.get(campo).touched;
-	}
-
-	checkPassword(password, password2) {
-		return (form: FormGroup) => {
-			const pass1Control = form.get(password);
-			const pass2Control = form.get(password2);
-
-			pass1Control.value === pass2Control.value
-				? pass2Control.setErrors(null)
-				: pass2Control.setErrors({ ...pass2Control.errors });
-		};
 	}
 }

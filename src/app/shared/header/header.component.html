@@ -195,13 +195,14 @@
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false"><img [src]="imgUrl" alt="user"
+                        aria-haspopup="true" aria-expanded="false"><img [src]="user.imagenUrl" alt="user"
                             class="profile-picture profile-pic" /></a>
                     <div class="dropdown-menu dropdown-menu-right animated fadeIn fast">
                         <ul class="dropdown-user">
                             <li>
                                 <div class="dw-user-box">
-                                    <div class="u-img"><img [src]="imgUrl" alt="user" class="profile-picture"></div>
+                                    <div class="u-img"><img [src]="user.imagenUrl" alt="user" class="profile-picture">
+                                    </div>
                                     <div class="u-text">
                                         <h4>{{user.name}}</h4>
                                         <p class="text-muted">{{user.email}}</p><a href="pages-profile.html"
@@ -210,7 +211,7 @@
                                 </div>
                             </li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
+                            <li><a [routerLink]="['/dashboard/profile']"><i class="ti-user"></i> My Profile</a></li>
                             <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
                             <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
                             <li role="separator" class="divider"></li>

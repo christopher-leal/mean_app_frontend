@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Mi perfil de usuario</h4>
+                <h6 class="card-subtitle">Ajustes</h6>
+                <form class="form p-t-20" [formGroup]="form" (ngSubmit)="handleSubmit()">
+                    <div class="form-group">
+                        <label for="exampleInputuname">Nombre del usuario</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="ti-user"></i></div>
+                            <input type="text" class="form-control" id="exampleInputuname" formControlName="name"
+                                placeholder="Nombre del usuario">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email </label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="ti-email"></i></div>
+                            <input type="email" class="form-control" id="exampleInputEmail1" formControlName="email"
+                                placeholder="Ingresa email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd1">Contraseña</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="ti-lock"></i></div>
+                            <input type="password" class="form-control" id="pwd1" formControlName="password"
+                                placeholder="Ingresa contraseña">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd2">Confiram contraseña</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="ti-lock"></i></div>
+                            <input type="password" class="form-control" id="pwd2" formControlName="password2"
+                                placeholder="Comfirma contraseña">
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-inverse waves-effect waves-light  m-r-10">Cancel</button>
+                        <button type="submit" class="btn btn-success waves-effect waves-light"
+                            [disabled]="form.invalid">
+                            <i class="fa fa-save"></i>
+                            Guardar cambios
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Avatar</h4>
+                <h6 class="card-subtitle">Imagen del usuario</h6>
+                <img src="" alt="">
+                <input type="file" class="form-control" (change)="changeFile($event.target.files[0])">
+                <div class="text-right">
+                    <button type="submit" class="btn btn-success waves-effect waves-light m-r-10 mt-4"
+                        [disabled]="!file" (click)="fileUpload()">
+                        <i class="fa fa-save"></i>
+                        Guardar imagen
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

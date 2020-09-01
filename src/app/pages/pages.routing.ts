@@ -9,6 +9,7 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { IsAuthGuard } from './../guards/is-auth.guard';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
 	{
@@ -16,6 +17,12 @@ const routes: Routes = [
 		component: PagesComponent,
 		children: [
 			{ path: '', component: DashboardComponent, data: { titulo: 'Dashboard' }, canActivate: [ IsAuthGuard ] },
+			{
+				path: 'profile',
+				component: ProfileComponent,
+				data: { titulo: 'Perfil' },
+				canActivate: [ IsAuthGuard ]
+			},
 			{
 				path: 'progress',
 				component: ProgressComponent,

@@ -5,7 +5,7 @@ import { map, tap, catchError } from 'rxjs/operators';
 import { saveToken, getToken } from './../utils/jwt';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
-import { User } from './../interfaces/User';
+import { User } from './../models/User';
 
 declare const gapi: any;
 
@@ -48,11 +48,15 @@ export class AuthService {
 		const token = getToken();
 		return this._http.get(`${this.url}auth/refreshToken`, { headers: { token } }).pipe(
 			map((resp: any) => {
-				this.user = resp.user;
+				const { email, google, nombre, role, img = '', _id } = resp.user;
+				this.user = new User(nombre, email, '', img, google, role, _id);
 				saveToken(resp.token);
 				return true;
 			}),
-			catchError((err) => of(false))
+			catchError((err) => {
+				console.log(err);
+				return of(false);
+			})
 		);
 	}
 
@@ -69,10 +73,14 @@ export class AuthService {
 		});
 	}
 
-	get getImage() {
-		if (this.user.img.startsWith('http')) {
-			return `${this.user.img}`;
-		}
-		return `${this.url}uploads/users/${this.user.img}`;
+	// get getImage() {
+	// 	if (this.user.img.startsWith('http')) {
+	// 		return `${this.user.img}`;
+	// 	}
+	// 	return `${this.url}uploads/users/${this.user.img}`;
+	// }
+
+	get userId() {
+		return this.user._id || '';
 	}
 }
