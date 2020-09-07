@@ -6,22 +6,10 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HeaderComponent } from './header/header.component';
 
-
-
+import { PipesModule } from './../pipes/pipes.module';
 @NgModule({
-  declarations: [
-    BreadcrumbsComponent,
-    SidebarComponent,
-    HeaderComponent,
-  ],
-  exports: [
-    BreadcrumbsComponent,
-    SidebarComponent,
-    HeaderComponent,
-  ],
-  imports: [
-    CommonModule,
-    RouterModule
-  ]
+	declarations: [ BreadcrumbsComponent, SidebarComponent, HeaderComponent ],
+	exports: [ BreadcrumbsComponent, SidebarComponent, HeaderComponent, PipesModule ],
+	imports: [ CommonModule, RouterModule, PipesModule ]
 })
-export class SharedModule { }
+export class SharedModule {}

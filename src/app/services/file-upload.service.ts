@@ -11,7 +11,7 @@ export class FileUploadService {
 
 	constructor(private _http: HttpClient) {}
 
-	updateFile(file: File, type: 'users' | 'doctor' | 'hospitals', id: string) {
+	updateFile(file: File, type: 'users' | 'doctors' | 'hospitals', id: string) {
 		const formData = new FormData();
 		formData.append('file', file);
 		formData.append('type', type);

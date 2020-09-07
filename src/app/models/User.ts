@@ -9,12 +9,13 @@ export class User {
 		public password?: string,
 		public img?: string,
 		public google?: boolean,
+		public status?: boolean,
 		public role?: string,
 		public _id?: string
 	) {}
 
 	get imagenUrl() {
-		if (this.img.includes('http')) {
+		if (this.img && this.img.includes('http')) {
 			return this.img;
 		}
 

@@ -18,6 +18,7 @@ export class ProfileComponent implements OnInit {
 	form: FormGroup;
 	user: User;
 	file: File;
+	previewUrl: any = null;
 	constructor(
 		private _fb: FormBuilder,
 		private _userService: UserService,
@@ -28,6 +29,7 @@ export class ProfileComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+		console.log(this.user);
 		this.form = this._fb.group(
 			{
 				name: [ this.user.name, [ Validators.required ] ],
@@ -65,7 +67,7 @@ export class ProfileComponent implements OnInit {
 				})
 			)
 			.subscribe((res: any) => {
-				console.log(res.user);
+				console.log(res);
 				if (res.ok) {
 					Swal.fire({
 						toast: true,
@@ -91,6 +93,16 @@ export class ProfileComponent implements OnInit {
 
 	changeFile(file: File) {
 		this.file = file;
+
+		if (!file) {
+			return (this.previewUrl = null);
+		}
+		const reader = new FileReader();
+		reader.readAsDataURL(file);
+
+		reader.onloadend = () => {
+			this.previewUrl = reader.result;
+		};
 	}
 
 	fileUpload() {

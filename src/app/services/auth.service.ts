@@ -48,8 +48,8 @@ export class AuthService {
 		const token = getToken();
 		return this._http.get(`${this.url}auth/refreshToken`, { headers: { token } }).pipe(
 			map((resp: any) => {
-				const { email, google, nombre, role, img = '', _id } = resp.user;
-				this.user = new User(nombre, email, '', img, google, role, _id);
+				const { email, google, status, name, role, img = '', _id } = resp.user;
+				this.user = new User(name, email, '', img, google, status, role, _id);
 				saveToken(resp.token);
 				return true;
 			}),
@@ -81,6 +81,7 @@ export class AuthService {
 	// }
 
 	get userId() {
+		console.log(this.user);
 		return this.user._id || '';
 	}
 }

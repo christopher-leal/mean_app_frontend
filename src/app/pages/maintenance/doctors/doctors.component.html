@@ -1,0 +1,87 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <input type="search" class="form-control" placeholder="Buscar hospital" #searchInput>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-spinner *ngIf="isLoading"></app-spinner>
+
+<div class="row animated fadeIn fast" *ngIf="!isLoading">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-8">
+                        <h4 class="card-title">Usuarios</h4>
+                        <h6 class="card-subtitle">
+                            Usuarios registrados
+                        </h6>
+                    </div>
+                    <div class="col-4">
+                        <div class="text-right">
+                            <button class="btn btn-primary" [routerLink]="['/dashboard/doctor','new']"
+                                routerLinkActive="router-link-active">
+                                <i class="fa fa-hospital-o"></i> Crear doctor
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="w100">Foto</th>
+                                <th>Nombre</th>
+                                <th class="w100">Estatus</th>
+                                <th class="text-nowrap w100">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let doctor of doctors">
+                                <td class="text-center">
+                                    <img class="img-fluid avatar profile-picture cursor"
+                                        [src]="doctor.img|showImg:'doctors'" [alt]="doctor.name"
+                                        (click)="openModal(doctor)">
+                                </td>
+                                <td>
+                                    {{doctor.name}}
+                                </td>
+                                <td class="text-center">
+                                    <span [ngSwitch]="doctor.status">
+                                        <span class="label label-success" *ngSwitchCase="true">
+                                            Activo
+                                        </span>
+                                        <span class="label label-danger" *ngSwitchCase="false">
+                                            Inactivo
+                                        </span>
+                                    </span>
+                                </td>
+                                <td class="text-nowrap text-center">
+                                    <span class="cursor" data-toggle="tooltip" data-original-title="Editar"
+                                        [routerLink]="['/dashboard/doctor',doctor._id]"> <i
+                                            class="fa fa-pencil text-inverse m-r-10 "></i>
+                                    </span>
+                                    <span class="cursor" (click)="deleteDoctor(doctor)"> <i
+                                            class="fa fa-close text-danger"></i>
+                                    </span>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-right">
+                    <span class="">Total de elementos: {{totalItems}}</span>
+                    <button class="btn btn-secondary m-3" (click)="changePage(-limit)"
+                        [disabled]="offset<=0">Anterior</button>
+                    <button class="btn btn-secondary" (click)="changePage(limit)"
+                        [disabled]="offset+limit >= totalItems">Siguiente</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

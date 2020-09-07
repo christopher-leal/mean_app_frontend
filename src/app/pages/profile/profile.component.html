@@ -18,7 +18,7 @@
                         <div class="input-group">
                             <div class="input-group-addon"><i class="ti-email"></i></div>
                             <input type="email" class="form-control" id="exampleInputEmail1" formControlName="email"
-                                placeholder="Ingresa email">
+                                placeholder="Ingresa email" [readonly]="user.google">
                         </div>
                     </div>
                     <div class="form-group">
@@ -26,7 +26,7 @@
                         <div class="input-group">
                             <div class="input-group-addon"><i class="ti-lock"></i></div>
                             <input type="password" class="form-control" id="pwd1" formControlName="password"
-                                placeholder="Ingresa contraseña">
+                                placeholder="Ingresa contraseña" [readonly]="user.google">
                         </div>
                     </div>
                     <div class="form-group">
@@ -34,7 +34,7 @@
                         <div class="input-group">
                             <div class="input-group-addon"><i class="ti-lock"></i></div>
                             <input type="password" class="form-control" id="pwd2" formControlName="password2"
-                                placeholder="Comfirma contraseña">
+                                placeholder="Comfirma contraseña" [readonly]="user.google">
                         </div>
                     </div>
                     <div class="text-right">
@@ -54,7 +54,10 @@
             <div class="card-body">
                 <h4 class="card-title">Avatar</h4>
                 <h6 class="card-subtitle">Imagen del usuario</h6>
-                <img src="" alt="">
+                <div class="text-center">
+                    <img *ngIf="!previewUrl" [src]="user.imagenUrl" alt="" class="img-avatar img-fluid profile-picture">
+                    <img *ngIf="previewUrl" [src]="previewUrl" alt="" class="img-avatar img-fluid profile-picture">
+                </div>
                 <input type="file" class="form-control" (change)="changeFile($event.target.files[0])">
                 <div class="text-right">
                     <button type="submit" class="btn btn-success waves-effect waves-light m-r-10 mt-4"

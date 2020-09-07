@@ -10,6 +10,10 @@ import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { IsAuthGuard } from './../guards/is-auth.guard';
 import { ProfileComponent } from './profile/profile.component';
+import { UsersComponent } from './maintenance/users/users.component';
+import { DoctorsComponent } from './maintenance/doctors/doctors.component';
+import { HospitalsComponent } from './maintenance/hospitals/hospitals.component';
+import { DoctorComponent } from './maintenance/doctor/doctor.component';
 
 const routes: Routes = [
 	{
@@ -47,7 +51,28 @@ const routes: Routes = [
 				data: { titulo: 'Promesas' },
 				canActivate: [ IsAuthGuard ]
 			},
-			{ path: 'rxjs', component: RxjsComponent, data: { titulo: 'RxJs' }, canActivate: [ IsAuthGuard ] }
+			{ path: 'rxjs', component: RxjsComponent, data: { titulo: 'RxJs' }, canActivate: [ IsAuthGuard ] },
+
+			// maintenance
+			{ path: 'users', component: UsersComponent, data: { titulo: 'Usuarios' }, canActivate: [ IsAuthGuard ] },
+			{
+				path: 'doctors',
+				component: DoctorsComponent,
+				data: { titulo: 'Doctores' },
+				canActivate: [ IsAuthGuard ]
+			},
+			{
+				path: 'doctor/:id',
+				component: DoctorComponent,
+				data: { titulo: 'Doctor' },
+				canActivate: [ IsAuthGuard ]
+			},
+			{
+				path: 'hospitals',
+				component: HospitalsComponent,
+				data: { titulo: 'Hospitales' },
+				canActivate: [ IsAuthGuard ]
+			}
 		],
 		canActivate: [ IsAuthGuard ]
 	}

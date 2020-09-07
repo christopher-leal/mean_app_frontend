@@ -15,6 +15,10 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { ProfileComponent } from './profile/profile.component';
+import { DoctorsComponent } from './maintenance/doctors/doctors.component';
+import { UsersComponent } from './maintenance/users/users.component';
+import { HospitalsComponent } from './maintenance/hospitals/hospitals.component';
+import { DoctorComponent } from './maintenance/doctor/doctor.component';
 
 @NgModule({
 	declarations: [
@@ -25,7 +29,11 @@ import { ProfileComponent } from './profile/profile.component';
 		AccountSettingsComponent,
 		PromesasComponent,
 		RxjsComponent,
-		ProfileComponent
+		ProfileComponent,
+		DoctorsComponent,
+		UsersComponent,
+		HospitalsComponent,
+		DoctorComponent
 	],
 	exports: [ DashboardComponent, ProgressComponent, Grafica1Component, PagesComponent, AccountSettingsComponent ],
 	imports: [ CommonModule, FormsModule, ReactiveFormsModule, SharedModule, RouterModule, ComponentsModule ]

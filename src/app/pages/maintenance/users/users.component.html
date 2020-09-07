@@ -1,0 +1,94 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <input type="search" class="form-control" placeholder="Buscar usuario" #searchInput>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-spinner *ngIf="isLoading"></app-spinner>
+
+<div class="row animated fadeIn fast" *ngIf="!isLoading">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Usuarios</h4>
+                <h6 class="card-subtitle">
+                    Usuarios registrados
+                </h6>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="w100">Avatar</th>
+                                <th>Correo</th>
+                                <th>Nombre</th>
+                                <th>Rol</th>
+                                <th class="w100">Auth</th>
+                                <th class="w100">Estatus</th>
+                                <th class="text-nowrap w100">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of users">
+                                <td class="text-center">
+                                    <img class="img-fluid avatar profile-picture cursor" [src]="user.imagenUrl"
+                                        [alt]="user.name" (click)="openModal(user)">
+                                </td>
+                                <td>
+                                    {{user.email}}
+                                </td>
+                                <td>
+                                    {{user.name}}
+                                </td>
+                                <td>
+                                    <select [(ngModel)]="user.role" class="form-control" (change)="changeRole(user)">
+                                        <option value="ADMIN">ADMIN</option>
+                                        <option value="USER">USUARIO</option>
+                                    </select>
+                                </td>
+                                <td class="text-center">
+                                    <span [ngSwitch]="user.google">
+                                        <span class="label label-megna" *ngSwitchCase="true">
+                                            Google
+                                        </span>
+                                        <span class="label label-info" *ngSwitchCase="false">
+                                            Email
+                                        </span>
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <span [ngSwitch]="user.status">
+                                        <span class="label label-success" *ngSwitchCase="true">
+                                            Activo
+                                        </span>
+                                        <span class="label label-danger" *ngSwitchCase="false">
+                                            Inactivo
+                                        </span>
+                                    </span>
+                                </td>
+                                <td class="text-nowrap text-center">
+                                    <span class="cursor" data-toggle="tooltip" data-original-title="Edit"> <i
+                                            class="fa fa-pencil text-inverse m-r-10 "></i> </span>
+                                    <span class="cursor" (click)="deleteUser(user)"> <i
+                                            class="fa fa-close text-danger"></i>
+                                    </span>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-right">
+                    <span class="">Total de elementos: {{totalItems}}</span>
+                    <button class="btn btn-secondary m-3" (click)="changePage(-limit)"
+                        [disabled]="offset<=0">Anterior</button>
+                    <button class="btn btn-secondary" (click)="changePage(limit)"
+                        [disabled]="offset+limit >= totalItems">Siguiente</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

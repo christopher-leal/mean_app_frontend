@@ -1,0 +1,35 @@
+<div class="fondo-modal animated fadeIn fast" [class.hidden]="_modalService.getModalStatus">
+    <div class="modal fade show" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1"
+        style="display: block; padding-right: 16px;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel1">Cargar imagen</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                        (click)="closeModal()"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    <h3>Seleccione una imagen</h3>
+                    <div class="text-center">
+                        <img *ngIf="!previewUrl" [src]="_modalService.img" alt=""
+                            class="img-avatar img-fluid profile-picture">
+                        <img *ngIf="previewUrl" [src]="previewUrl" alt="" class="img-avatar img-fluid profile-picture">
+                    </div>
+                    <input type="file" class="form-control" (change)="changeFile($event.target.files[0])">
+                    <div class="text-right">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"
+                        (click)="closeModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-success waves-effect waves-light m-r-10" [disabled]="!file"
+                        (click)="fileUpload()">
+                        <i class="fa fa-save"></i>
+                        Cargar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
